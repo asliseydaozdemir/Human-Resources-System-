@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+    Add Event
+{% endblock title %}
+
+{% block body %}
+    <style>
+        .mul-select{
+            width: 100%;
+     }
+    </style>
+<p hidden id="message_id">{{ message }}</p>
+    <div class="container">
+        <form action="/add" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label">Event title</label>
+              <input type="text" class="form-control" name="title" id="title" placeholder="Enter the event title">
+            </div>
+            <div class="mb-3">
+              <label for="start" class="form-label">Start date</label>
+              <input type="text" class="form-control" name="start" id="start" placeholder="Format is yyyy-mm-ddThh:mm Ignore Thh:mm if you need it for all day">
+            </div>
+            <div class="mb-3">
+              <label for="end" class="form-label">End date</label>
+              <input type="text" class="form-control" name="end" id="end" placeholder="leave empty for event to be all day">
+            </div>
+            <div class="mb-3">
+              <label for="url" class="form-label">Event url</label>
+              <input type="url" class="form-control" name="url" id="url" placeholder="Leave empty for no url to be there">
+            </div>
+             <div class="">
+        <label  class="form-label">Participants</label>
+
+
+                <div class="form-group" >
+                    <select class="mul-select" multiple="true" name="participant">
+                        {% for employee in employees %}
+                        <option value={{employee.mail}} >{{employee.mail}}</option>
+                         {% endfor %}
+                    </select>
+                </div>
+
+
+    </div>
+             <a href="{{ url_for('home_page') }}" target="_blank"> <button type="submit" class="btn btn-outline-dark">Submit</button></a>
+
+          </form>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".mul-select").select2({
+                    placeholder: "select participants", //placeholder
+                    tags: true,
+                    tokenSeparators: ['/',',',';'," "]
+                });
+            })
+    </script>
+<script>
+    const message_text = document.getElementById("message_id").innerHTML;
+    if (message_text != null && message_text !== '' && message_text !== 'None') {
+        alert(message_text);
+    }
+</script>
+{% endblock body %}

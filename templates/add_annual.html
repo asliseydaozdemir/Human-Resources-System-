@@ -1,0 +1,40 @@
+{% extends 'annual_base.html' %}
+{% block title %}
+    Add Event
+{% endblock title %}
+
+{% block body %}
+    <style>
+        .mul-select{
+            width: 100%;
+     }
+    </style>
+<p hidden id="message_id">{{ message }}</p>
+    <div class="container">
+        <form action="/add_annual" method="POST">
+            <br> <br>
+            <div class="mb-3">
+              <label for="title" class="form-label">Employee mail: </label>
+              <input type="text" class="form-control" name="title" id="title" placeholder="Enter the employee: mail">
+            </div>
+            <div class="mb-3">
+              <label for="start" class="form-label">Start date</label>
+              <input type="text" class="form-control" name="start" id="start" placeholder="Format is yyyy-mm-ddThh:mm Ignore Thh:mm if you need it for all day">
+            </div>
+            <div class="mb-3">
+              <label for="end" class="form-label">End date</label>
+              <input type="text" class="form-control" name="end" id="end" placeholder="leave empty for event to be all day">
+            </div>
+
+             <a href="{{ url_for('home_page') }}" target="_blank"> <button type="submit" class="btn btn-outline-dark">Submit</button></a>
+
+          </form>
+    </div>
+<script>
+    const message_text = document.getElementById("message_id").innerHTML;
+    if (message_text != null && message_text !== '' && message_text !== 'None') {
+        alert(message_text);
+    }
+</script>
+
+{% endblock body %}

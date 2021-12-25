@@ -1,0 +1,40 @@
+{% extends 'annual_base.html' %}
+{% block title %}
+Calendar
+{% endblock title %}
+{% block body %}
+<div> <a href="{{ url_for('add_annual') }}" target="_parent"><button class="button-9">Add Annual Permit</button></a></div>
+<div class="container my-3">
+
+
+  <div id="calendar_2"></div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar_2');
+    var calendar_2 = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      aspectRatio: 2.25,
+      events: [
+        {% for event in permits %}
+      {
+        title: '{{event.title}}',
+        start: '{{event.start}}',
+        end: '{{event.end}}',
+      },
+      {% endfor %}
+
+      ],
+    eventClick: function (info) {
+      info.jsEvent.preventDefault(); // don't let the browser navigate
+
+
+    }
+    });
+  calendar_2.render();
+  print(events)
+  });
+</script>
+{% endblock body %}

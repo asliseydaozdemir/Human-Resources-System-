@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign In </h2>
+
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+
+      <h3>Human Resources System</h3>
+    </div>
+
+    <!-- Login Form -->
+    <form method="post">
+      <input type="text" id="login_id" class="fadeIn second" name="login_id" placeholder="login">
+      <input type  = "password" id="login_pass" class="fadeIn third" name="login_pass" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
+
+ <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Ad Soyad </th>
+          <th>Yaş</th>
+          <th>Cinsiyet</th>
+          <th>Maaş</th>
+          <th>Deneyim</th>
+          <th>Mail</th>
+          <th>Sektör</th>
+          <th>Kalan İzin Günü</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        {% for employee in employees %}
+        <tr>
+          <td>{{employee.ad_soyad}}</td>
+          <td>{{employee.yas}} </td>
+          <td>{{employee.cinsiyet}}</td>
+          <td>{{employee.maas}}</td>
+          <td>{{employee.deneyim}}</td>
+          <td>{{employee.mail}}</td>
+          <td>{{employee.sektor}}</td>
+          <td>{{employee.kalan_izin}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>

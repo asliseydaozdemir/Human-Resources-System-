@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Human Recruitment</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="style" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+      <link rel="stylesheet" href="static/css/hr.css">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+   <nav>
+  <ul>
+    <li>
+      <a href="{{ url_for('home_page') }}">Home</a>
+    </li>
+    <li>
+      <a href="{{ url_for('hr') }}">Human Recruitment</a>
+    </li>
+    <li>
+      <a href="{{ url_for('cal') }}">Event Calendar</a>
+    </li>
+
+    <li>
+      <a href="{{ url_for('annual_permit') }}">Annual Permit</a>
+    </li>
+     <li>
+      <a href="{{ url_for('login') }}">Login</a>
+    </li>
+  </ul>
+</nav>
+  <section>
+  <!--for demo wrap-->
+  <h1>Başvuran Listesi</h1>
+<br><br><br>
+    <div class="wrap">
+   <div class="search">
+      <input type="text" id="myInput" onkeyup='tableSearch()' class="searchTerm" placeholder="Başvuranları ara...">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+<br><br>
+    <div class="tbl-header">
+
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+               <th data-colname="name" scope="col">Ad Soyad </th>
+     <th data-colname="age" scope="col">Yaş</th>
+     <th data-colname="experience" scope="col">Deneyim</th>
+     <th data-colname="gpa" scope="col">Not Ortalaması</th>
+     <th data-colname="toefl" scope="col">Toefl Puanı</th>
+     <th data-colname="sektor" scope="col">Sektör</th>
+      <th data-colname="sektor" scope="col">Sertifika</th>
+     <th data-colname="mail" scope="col">Mail</th>
+     <th data-colname="point" scope="col">İşe Alım Puanı</th>
+     <th data-colname="get" scope="col">Alım Durumu</th>
+
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0" id="table" class="tabbedTable">
+      <tbody id="myTable">
+
+           {% for applicant in applicants %}
+   <tr>
+     <td>{{applicant[0]}}</td>
+     <td>{{applicant[1]}} </td>
+     <td>{{applicant[2]}}</td>
+     <td>{{applicant[3]}}</td>
+     <td>{{applicant[4]}}</td>
+     <td>{{applicant[6]}}</td>
+     <td>{{applicant[5]}}</td>
+     <td >{{applicant[7]}}</td>
+     <td style=" text-align: center; ">{{applicant[8]}}</td>
+     <form action="/hr" method="POST">
+     <input type="hidden" id="custId" name="custId" value={{applicant[7]}}>
+         <input type="hidden" id="custName" name="custName" value={{applicant[0]}}>
+         <input type="hidden" id="custAge" name="custAge" value={{applicant[1]}}>
+         <input type="hidden" id="custEx" name="custEx" value={{applicant[2]}}>
+         <input type="hidden" id="custSec" name="custSec" value={{applicant[6]}}>
+     <td><button class="button-7" type="submit">süreci başlat</button></td>
+     </form>
+   </tr>
+
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="static/js/home.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+>
+
+</body>
+</html>
